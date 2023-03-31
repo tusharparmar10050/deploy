@@ -35,7 +35,7 @@ const Auth = () => {
             
                 const match = await authModule.comparePassword(password, user.password);
                 if (!match) return res.status(401).json({ error: 'Invalid email or password' });
-            
+                console.log(user)
                 const token = await authModule.generateToken(user);
                 res.status(200).json( token );
               } catch (error) {

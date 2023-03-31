@@ -3,6 +3,9 @@ const chaiHttp = require('chai-http');
 const { describe } = require('mocha');
 const server = require('../server.js');
 
+
+
+
 chai.should();
 
 chai.use(chaiHttp);
@@ -22,7 +25,7 @@ describe("POST /api/auth/ ", () => {
                 response.body.should.be.a('object');
                 response.body.should.have.property('message')
             done();
-            })
+        })
     }),
     it("it should not register user", (done) => {
         const user = {
@@ -31,14 +34,14 @@ describe("POST /api/auth/ ", () => {
             password: "tp162244"
         };
         chai.request(server)
-            .post("/api/auth/register")
-            .send(user)
-            .end((error, response) => {
-                response.should.have.status(500);
-                response.body.should.be.a('object');
-                response.body.should.have.property('error')
+        .post("/api/auth/register")
+        .send(user)
+        .end((error, response) => {
+            response.should.have.status(500);
+            response.body.should.be.a('object');
+            response.body.should.have.property('error')
             done();
-            })
+        })
     })
     
     

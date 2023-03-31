@@ -20,7 +20,7 @@ const Blog = () => {
             const id = req.params.id
             const updated_value = [req.body.image, req.body.title, req.body.subtitle, req.body.date, req.body.blogby, req.body.html]
             blogModule.updateBlog(id, updated_value, (error, data) => {
-                if (data.changedRows === 0) {
+                if (data.affectedRows === 0) {
                     res.status(500).json({ error: "Please input proper fileds otherwise you input same data." })
                 }else{
                     res.status(200).json({ message: 'Record updated successfully.' })
