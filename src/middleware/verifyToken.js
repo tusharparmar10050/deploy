@@ -12,7 +12,6 @@ function verifyUser(req, res, next) {
     if (!user) {
       return res.status(401).json({
         message: 'Error getting to verify user',
-        error: error,
       });
     }
     else {

@@ -9,10 +9,10 @@ const Newsletter = () => {
             const email = req.body.email
             newsletterModule.registerFornewsletter(email, (error, result) => {
                 if (error) {
-                    res.status(500).json({ error });
+                    res.status(500).json({ message: 'Please enter proper email' ,error });
                 }
                 else {
-                    res.status(200).json({ message: 'Email registered successfully!',result});
+                    res.status(200).json({ message: 'Email registered successfully!'});
                 }
             })
 

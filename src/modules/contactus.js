@@ -29,7 +29,7 @@ exports.createContactus = (value, email, callback) => {
 exports.getcontactUs = (callback) => {
     con.query(`SELECT * FROM contactus`, (error, result) => {
         if (error) {
-            return callback('error: ' + error)
+            return callback(error, null)
         }
         return callback(null, result);
 

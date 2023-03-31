@@ -28,7 +28,7 @@ const User = () => {
             userModule.deleteUser(id, (error, result) => {
                 if (error) res.status(500).json({message: 'Error deleting User'});
                 else if (result.affectedRows == 0) res.status(404).json({message: 'User not Exist otherwise User already Deleted'});
-                else res.status(200).json({message:'User deleted successfully!'})
+                else res.status(200).json({message:'User deleted successfully'})
             })
         }
         
