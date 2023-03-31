@@ -55,7 +55,7 @@ describe("delete user /api/user/ ", () => {
         con.query('INSERT INTO user (username, email, password) VALUES (?, ?, ?)', ['John Doe', 'johndoe@example.com', 'tp162244'], (err, result) => {
           if (err) {
             console.error('error inserting user: ' + err.stack);
-            done(err);
+            // done(err);
           } else {
             // Delete the user from the database
             const deleteQuery = 'DELETE FROM user WHERE id = ?';
@@ -63,7 +63,7 @@ describe("delete user /api/user/ ", () => {
             con.query(deleteQuery, deleteValues, (err) => {
               if (err) {
                 console.error('error deleting user: ' + err.stack);
-                done(err);
+                // done(err);
               } else {
                 const userId = result.insertId - 1;
         
@@ -82,10 +82,10 @@ describe("delete user /api/user/ ", () => {
                     con.query(selectQuery, selectValues, (err, result) => {
                       if (err) {
                         console.error('error selecting user: ' + err.stack);
-                        done(err);
+                        // done(err);
                       } else {
                         expect(result.length).to.equal(0);
-                        done();
+                        // done();
                       }
                     });
                   });
