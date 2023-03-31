@@ -13,20 +13,34 @@ chai.use(chaiHttp);
 describe("PUT /api/user/ ", () => {
     it("it should update user", (done) => {
       authToken((err, token) => {
-        const user = {
-                  "username":"jaydeep",
-                  "email": "jv@gmail.com"
-          };
-          chai.request(server)
-              .put("/api/user/1")
-              .send(user)
-              .set('token', token)
-              .end((error, response) => {
-                  response.should.have.status(200);
-                  response.body.should.be.a('object');
-                  response.body.should.have.property('message').eq('User updated successfully!')
-              done();
-              })
+        con.query('INSERT INTO user (username, email, password) VALUES (?, ?, ?)', ['John Sin', 'johnsin@example.com', 'tp162244'], (err, result) => {
+          if (err) {
+            console.error('error inserting user: ' + err.stack);
+            done(err);
+          } else {
+            const updateQuery = `UPDATE user SET username = ?, email = ? WHERE id = ?`;
+            const updateValues = ['Johny','johnsin@example.com',result.insertId];
+            con.query(updateQuery, updateValues, (err) => {
+              if (err) {
+                console.error('error deleting user: ' + err.stack);
+                done(err);
+              } else {
+                const userId = result.insertId - 1;
+        
+                
+                chai.request(server)
+                  .put(`/api/user/${userId}`)
+                  .set('token', token)
+                  .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('message').eq('User updated successfully!')
+                    done()
+                  });
+              }
+            });
+          }
+        })
             })
     }),
     it("it should not update blogs", (done) => {
